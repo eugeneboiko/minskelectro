@@ -1,0 +1,131 @@
+<form name="orderForm" ng-submit="orderForm.$valid && mainCtrl.postOrder()">
+
+  <div class="form-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <span>Корзина</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="mainCtrl.previousState()" title="Закрыть"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="panel-body no-animation">
+
+        <h4 ng-if="mainCtrl.calcOrderProductsPrice()">
+          <span ng-bind="mainCtrl.filterCurrency(mainCtrl.calcOrderProductsPrice()) + ' + ' + mainCtrl.filterCurrency(mainCtrl.calcOrderDeliveryPrice())"></span>
+          <span> за доставку внутри МКАД г.Минска. Итого: <span class="label label-success" ng-bind="mainCtrl.filterCurrency(mainCtrl.calcOrderTotalPrice())"></span></span>
+        </h4>
+
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="(id, product) in appData.order.product">
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="mainCtrl.removeProductFromCart(id)" title="Удалить из корзины"><span aria-hidden="true">&times;</span></button>
+
+            <div class="media">
+              <div class="media-left media-left2">
+                <a href="#" ng-click="mainCtrl.getProduct(id)">
+                  <img class="media-object" src="" ng-src="{{product.icon}}" ng-if="product.icon" width="100" height="100" title="подробнее..." alt="подробнее...">
+                </a>
+                <div class="media-object text-center" ng-if="!product.icon" style="width:100px;height:100px">Нет фото</div>
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">
+                  <a href="#" ng-click="mainCtrl.getProduct(id)" ng-bind="product.name + ' (#' + id + ')'"></a>
+                </h4>
+
+                <span>Цена: <span class="text-primary" ng-bind="mainCtrl.filterCurrency(product.price)"></span></span>
+                <span>Гарантия: <span class="text-primary" ng-bind="product.warranty + ' мес.'"></span></span>
+                <span>Доставка: <span class="text-primary" ng-bind="product.delivery_time"></span></span>
+
+                <span class="input-group col-xs-1">
+                  <span class="input-group-addon">Кол-во, шт.:</span>
+                  <input name="count{{$index}}" type="number" class="form-control inputNumber" ng-model="product.count" title="Количество" min="1" max="100" required>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="product.count" title="Обязательное поле"></span>
+                    <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="orderForm.count{{$index}}.$valid" title="Всё правильно"></span>
+                    <span class="glyphicon glyphicon-alert text-danger" aria-hidden="true" ng-show="orderForm.count{{$index}}.$invalid" title="Неправильно заполнено"></span>
+                  </span>
+                </span>
+
+                <div ng-bind="product.short_desc"></div>
+                <div class="label label-warning" ng-if="product.delivery_n_a > 0">Продукт в данный момент отсутствует на складе!</div>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+
+        <h4>Контактная информация</h4>
+
+        <div class="input-group col-xs-1">
+          <span class="input-group-addon">
+            <label for="cart_subscribe">Подписаться на новости</label>
+          </span>
+          <span class="input-group-addon">
+            <input id="cart_subscribe" type="checkbox" ng-model="appData.user.subscribe">
+          </span>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="name" type="text" class="form-control" ng-model="appData.user.name" maxlength="20" placeholder="Ваше имя" title="Ваше имя" required autofocus>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.name" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.name && orderForm.name.$valid" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="phone" type="text" class="form-control" ng-model="appData.user.phone" maxlength="30" placeholder="Телефон" title="Телефон для обратной связи" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.phone" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.phone && orderForm.phone.$valid" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="address" type="text" class="form-control" ng-model="appData.user.address" maxlength="40" placeholder="Адрес. Куда доставить?" title="Адрес. Куда доставить?" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.address" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.address && orderForm.address.$valid" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="email" type="email" class="form-control" ng-model="appData.user.email" maxlength="30" placeholder="E-mail. Куда отправить подтверждение?" title="E-mail. Куда отправить подтверждение?">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="orderForm.email.$valid-email && orderForm.email.$valid" title="Всё правильно"></span>
+            <span class="glyphicon glyphicon-alert text-danger" aria-hidden="true" ng-show="orderForm.email.$invalid-email || orderForm.email.$invalid" title="Неправильно заполнено"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="referral" type="text" class="form-control" ng-model="appData.user.referral" maxlength="30" placeholder="Как вы нас нашли? kosht, google, tut.by...?" title="Как вы нас нашли? kosht, google, tut.by...?">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <textarea name="comment" class="form-control" ng-model="appData.user.comment" placeholder="Комментарий. Для дополнительной информации, например, желаемое время доставки" title="Комментарий. Для дополнительной информации, например, желаемое время доставки"></textarea>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group col-xs-1">
+          <span class="input-group-addon">Введите цифры: <img ng-src="/ajax/http_get_captcha.php?id={{appData.user.captcha.id}}"/></span>
+          <input name="captcha" type="number" class="form-control inputNumber" ng-model="appData.user.captcha.value" maxlength="4" min="1000" max="9999" placeholder="0000" title="Введите цифры с картинки" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.captcha.value" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.captcha.value && orderForm.captcha.$valid" title="Всё правильно"></span>
+            <span class="glyphicon glyphicon-alert text-danger" aria-hidden="true" ng-show="orderForm.captcha.$invalid" title="Неправильно заполнено"></span>
+          </span>
+        </div>
+
+        <input type="submit" class="contact btn btn-primary" ng-disabled="orderForm.$invalid" value="Отправить заказ">
+
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,16 @@
+<div class="messages-box">
+  <div class="alert alert-{{msg.type}} alert-dismissible" role="alert" ng-repeat="(createdOn, msg) in appData.log">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="mainCtrl.removeMessage(createdOn)" title="Закрыть"><span aria-hidden="true">&times;</span></button>
+    <strong>
+      <span ng-bind="createdOn | date:'HH:mm:ss' + ': '"></span>
+      <span ng-switch on="msg.type">
+        <span ng-switch-when="warning">Внимание!</span>
+        <span ng-switch-when="danger">Ошибка!</span>
+        <span ng-switch-when="success">Успех!</span>
+        <span ng-switch-when="info">К сведению!</span>
+        <span ng-switch-default></span>
+      </span>
+    </strong>
+    <span ng-bind-html="msg.content"></span>
+  </div>
+</div>

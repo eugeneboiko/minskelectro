@@ -1,0 +1,32 @@
+<form name="errorForm" ng-submit="errorForm.$valid && mainCtrl.postError()">
+  <div class="form-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <span>Администратор сайта получит извещение об ошибке в тексте</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="mainCtrl.previousState()" title="Закрыть"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="panel-body">
+        <div class="alert alert-danger" role="alert" ng-bind="appData.user.text.selected"></div>
+
+        <div class="input-group contact">
+          <textarea name="comment" class="form-control" ng-model="appData.user.comment" placeholder="Очевидна ли ошибка из этого текста? Если нет - напишите, как правильно." title="Очевидна ли ошибка из этого текста? Если нет - напишите, как правильно."></textarea>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group col-xs-1">
+          <span class="input-group-addon">Введите цифры: <img ng-src="/ajax/http_get_captcha.php?id={{appData.user.captcha.id}}"/></span>
+          <input name="captcha" type="number" class="form-control inputNumber" ng-model="appData.user.captcha.value" maxlength="4" min="1000" max="9999" placeholder="0000" title="Введите цифры с картинки" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.captcha.value" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.captcha.value && errorForm.captcha.$valid" title="Всё правильно"></span>
+            <span class="glyphicon glyphicon-alert text-danger" aria-hidden="true" ng-show="errorForm.captcha.$invalid" title="Неправильно заполнено"></span>
+          </span>
+        </div>
+
+        <input type="submit" class="contact btn btn-primary" ng-disabled="errorForm.$invalid" value="Отправить сообщение">
+      </div>
+    </div>
+  </div>
+</form>

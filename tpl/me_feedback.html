@@ -1,0 +1,57 @@
+<form name="feedbackForm" ng-submit="feedbackForm.$valid && mainCtrl.postFeedback()">
+  <div class="form-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <span>Сообщение</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="mainCtrl.previousState()" title="Закрыть"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="panel-body no-animation">
+        <h4>Контактная информация</h4>
+
+        <div class="input-group contact">
+          <input name="name" type="text" class="form-control" ng-model="appData.user.name" maxlength="20" placeholder="Ваше имя" title="Ваше имя" required autofocus>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.name" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.name && feedbackForm.name.$valid" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="phone" type="text" class="form-control" ng-model="appData.user.phone" maxlength="30" placeholder="Телефон" title="Телефон для обратной связи">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="email" type="email" class="form-control" ng-model="appData.user.email" maxlength="30" placeholder="Email для обратной связи" title="E-mail для обратной связи">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.email" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.email && feedbackForm.email.$valid-email && feedbackForm.email.$valid" title="Всё правильно"></span>
+            <span class="glyphicon glyphicon-alert text-danger" aria-hidden="true" ng-show="feedbackForm.email.$invalid-email || feedbackForm.email.$invalid" title="Неправильно заполнено"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <textarea name="comment" class="form-control" ng-model="appData.user.comment" placeholder="Комментарий. Для дополнительной информации" title="Комментарий. Для дополнительной информации" required></textarea>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.comment" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.comment && feedbackForm.comment.$valid" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group col-xs-1">
+          <span class="input-group-addon">Введите цифры: <img ng-src="/ajax/http_get_captcha.php?id={{appData.user.captcha.id}}"/></span>
+          <input name="captcha" type="number" class="form-control inputNumber" ng-model="appData.user.captcha.value" maxlength="4" min="1000" max="9999" placeholder="0000" title="Введите цифры с картинки" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.captcha.value" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.captcha.value && feedbackForm.captcha.$valid" title="Всё правильно"></span>
+            <span class="glyphicon glyphicon-alert text-danger" aria-hidden="true" ng-show="feedbackForm.captcha.$invalid" title="Неправильно заполнено"></span>
+          </span>
+        </div>
+
+        <input type="submit" class="contact btn btn-primary" ng-disabled="feedbackForm.$invalid" value="Отправить сообщение">
+      </div>
+    </div>
+  </div>
+</form>

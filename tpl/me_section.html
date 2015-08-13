@@ -1,0 +1,200 @@
+<div class="well well-sm" ng-bind-html="appData.config.page_center_info" ng-if="appData.config.page_center_info && (appData.section.id != 1)"></div>
+
+<div ng-switch on="appData.section.id">
+
+  <div class="well well-sm" ng-bind-html="appData.section.description" ng-if="appData.section.description"></div>
+
+  <div class="well well-sm" ng-switch-when="7333">
+    Выбрать: Для авто
+    <a href='#' ng-click="mainCtrl.getSearch('car modulator')">FM-трансмиттер</a>;
+    Flash
+    <a href='#' ng-click="mainCtrl.getSearch('плеер 1gb')">1GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('плеер 2gb')">2GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('плеер 4gb')">4GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('плеер 8gb')">8GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('плеер 16gb')">16GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('плеер 32gb')">32GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('плеер hdd')">HDD</a>;
+    Для TV
+    <a href='#' ng-click="mainCtrl.getSearch('плеер dvd')">DVD</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('плеер usb')">USB</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="12890">
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('Набор CPU')">MB + CPU</a>;
+    Intel
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата 775')">LGA775</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата 1150')">LGA1150</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата 1155')">LGA1155</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата 1156')">LGA1156</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата 1366')">LGA1366</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата 2011')">LGA2011</a>;
+    AMD
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата AM2')">Soc-AM2(+)</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата AM3')">Soc-AM3(+)</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата FM1')">Soc-FM1</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Материнская плата FM2')">Soc-FM2</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="12892">
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('видеокарта geforce')">nVidea GeForce</a>
+    <a href='#' ng-click="mainCtrl.getSearch('видеокарта radeon')">AMD Radeon</a>
+    <a href='#' ng-click="mainCtrl.getSearch('видеокарта profile')">для корпусов ITX</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="13007">
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital (1gb')">1GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital (2gb')">2GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital (4gb')">4GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital (8gb')">8GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital (16gb')">16GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital (32gb')">32GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital (64gb')">64GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital (128gb')">128GB</a>;
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital microsd')">microSD/TransFlash</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('securedigital minisd')">miniSD</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="13264">
+    Выбрать:
+    Intel
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор intel i3')">i3</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор intel i5')">i5</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор intel i7')">i7</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('набор atom')">Atom</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор Soc-775')">LGA775</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор Soc-1150')">LGA1150</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор Soc-1155')">LGA1155</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор Soc-1156')">LGA1156</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор Soc-1366')">LGA1366</a>;
+    AMD
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор AM2')">Soc-AM2(+)</a>;
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор AM3')">Soc-AM3(+)</a>;
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор FM1')">Soc-FM1</a>;
+    <a href='#' ng-click="mainCtrl.getSearch('Процессор FM2')">Soc-FM2</a>;
+  </div>
+
+  <div class="well well-sm" ng-switch-when="13577">
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('usb flash (2gb')">2GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('usb flash (4gb')">4GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('usb flash (8gb')">8GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('usb flash (16gb')">16GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('usb flash (32gb')">32GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('usb flash (64gb')">64GB</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="13861">
+    <div>Оперативная память для персонального компьютера</div>
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('dimm ddr1 ecc')">ECC</a>
+  </div>
+
+  <div ng-switch-when="27520">
+    <div>Все клавиатуры с русскими буквами</div>
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('Клавиатура')">Клавиатуры</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('Мышь')">Мыши</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="36162">
+    <div>Оперативная память для ноутбука</div>
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('ddr1')">DDR</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('ddr2')">DDR2</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('ddr3')">DDR3</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="40595">
+    <div>Внешний винчестер/жёсткий диск</div>
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (320gb')">320GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (400gb')">400GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (500gb')">500GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (640gb')">640GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (750gb')">750GB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (1tb')">1TB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (2tb')">2TB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (3tb')">3TB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (4tb')">4TB</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD (6tb')">6TB</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="40597">
+    <div>Винчестер/жёсткий диск для персонального компьютера</div>
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('IDE HDD')">IDE</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('SATA HDD')">SATA</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('SAS HDD')">SAS</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('SCSI HDD')">SCSI</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('USB HDD')">USB</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="41258">
+    <div>Винчестер/жёсткий диск для нотбука</div>
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('IDE HDD 2,5')">IDE 2,5</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('SATA HDD 2,5')">SATA 2,5</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="64647">
+    <div>Оперативная память для персонального компьютера</div>
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('dimm ddr2 ecc')">ECC</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('dimm ddr2 2*')">Twin kit</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('dimm ddr2 3*')">Triple kit</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="64648">
+    <div>Оперативная память для персонального компьютера</div>
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('dimm ddr3 2*')">Twin kit</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('dimm ddr3 3*')">Triple kit</a>
+  </div>
+
+  <div class="well well-sm" ng-switch-when="64685">
+    Выбрать:
+    <a href='#' ng-click="mainCtrl.getSearch('весы напольные')">напольные</a>,
+    <a href='#' ng-click="mainCtrl.getSearch('весы кухонные')">кухонные</a>
+  </div>
+
+</div>
+
+<ul class="list-group">
+  <li class="list-group-item" ng-repeat="product in appData.section.product">
+    <div class="media">
+      <div class="media-left">
+        <a href="#" ng-click="mainCtrl.getProduct(product.id)">
+          <img class="media-object" src="" ng-src="{{product.icon}}" ng-if="product.icon" width="100" height="100" alt="подробнее...">
+        </a>
+        <div class="media-object text-center" ng-if="!product.icon" style="width:100px;height:100px">Нет фото</div>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          <a href="#" ng-click="mainCtrl.getProduct(product.id)" title="#{{$index + 1}}" ng-bind-html="mainCtrl.filterHighlightSearchSubstring(product.name) + ' (#' + product.id + ')'"></a>
+        </h4>
+        <p>
+          <span>Цена: <span class="text-danger" ng-bind="mainCtrl.filterCurrency(product.price)"></span></span>
+          <span ng-if="product.delivery_n_a == 0">
+            <span>Кол-во: </span>
+            <input type="number" class="inputNumber" ng-model="appData.order.product[product.id].count" ng-change="mainCtrl.getProductToCart(product.id)" title="Количество для помещения в корзину" min="1" max="100" required>
+            <span> шт.</span>
+          </span>
+          <span>Гарантия: <span class="text-danger" ng-bind="product.warranty + ' мес.'"></span></span>
+          <span>Доставка: <span class="text-danger" ng-bind="product.delivery_time"></span></span>
+          <span>Добавлен: <span class="text-danger" ng-bind="product.date_add | date:'yyyy-MM-dd'"></span></span>
+          <span>Обновлен: <span class="text-danger" ng-bind="product.date_update | date:'yyyy-MM-dd'"></span></span>
+          <span ng-if="product.delivery_n_a == 1"><span>На складе: </span><span class="text-danger">нет</span></span>
+          <a href="#" ng-class="'rating rating_' + product.rating" title="Рейтинг. Всего оценок: {{product.rating_count}}" ng-click="mainCtrl.showReview(product.id)"></a>
+        </p>
+        <p ng-bind-html="product.short_desc"></p>
+        <div class="text-success" ng-if="+product.delivery_free">Бесплатная доставка.</div>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<div class="well well-sm" ng-bind-html="appData.config.page_bottom_info" ng-if="appData.config.page_bottom_info && mainCtrl.isCurrentState('section')"></div>

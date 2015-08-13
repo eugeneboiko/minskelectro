@@ -1,0 +1,122 @@
+<div class="nav no-animation">
+  <ol class="breadcrumb">
+    <li ng-repeat="(level, link) in appData.navigation">
+
+      <a href="#" ng-click="mainCtrl.getSection(1)" ng-if="$first && mainCtrl.isCurrentState('search')" ng-bind="link.name + ' '"></a>
+      <a href="#" ng-click="mainCtrl.getSection(link.id)" ng-if="!$last && link.type == 'section' && !mainCtrl.isCurrentState('search')" ng-bind="link.name + ' '"></a>
+      <span ng-if="$last && link.type == 'section' && !mainCtrl.isCurrentState('search')" ng-bind="link.name + ' '"></span>
+
+      <span class="badge" ng-if="$last && (link.type == 'section' || mainCtrl.isCurrentState('search'))">
+        <span>Товаров: {{appData.section.product_count}} </span>
+        <span ng-if="appData.section.page.product_count < appData.section.product_count">
+          <span>, показано с {{(appData.section.page.current - 1) * appData.config.products_per_page + 1}} </span>
+          <span> по {{(appData.section.page.current - 1) * appData.config.products_per_page + appData.section.page.product_count}} </span>
+        </span>
+      </span>
+
+      <span ng-if="$last && link.type == 'section' && appData.section.subsection_count">
+
+        <select ng-model="appData.section.tmp" ng-options="sub.name for sub in appData.section.subsection" ng-change="mainCtrl.getSection(appData.section.tmp.id)" title="Подразделы в {{appData.section.name}}">
+          <option value="" disabled ng-bind="'-- подразделы (' + appData.section.subsection_count + ') --'"></option>
+        </select>
+
+      </span>
+
+      <span ng-if="$last && link.type == 'section'">
+
+        <select ng-model="appData.config.filter_sort_order" ng-if="appData.section.product_count" ng-change="mainCtrl.showActiveState(1)" title="Порядок отображения товаров">
+          <option value="-1" disabled>Порядок отображения</option>
+          <option value="0">возрастание цены</option>
+          <option value="1">алфавитный</option>
+          <option value="2">убывание цены</option>
+          <option value="3">в обратном алфавитном</option>
+          <option value="4">возр. даты добавления</option>
+          <option value="5">умен. даты добавления</option>
+        </select>
+
+        <select ng-model="appData.config.filter_stock" title="Наличие товара" ng-change="mainCtrl.showActiveState(1)">
+          <option value="-1" disabled>Наличие товара</option>
+          <option value="0" title="Товаров в наличии" ng-bind="'На складе (' + appData.config.product_count_instock + ')'"></option>
+          <option value="1" title="Всего товаров в магазине" ng-bind="'Всего (' + appData.config.product_count_total + ')'"></option>
+        </select>
+
+        <input type="number"
+               ng-model="appData.config.filter_minprice"
+               ng-model-options="{debounce: 150}"
+               ng-change="mainCtrl.showActiveState(1)"
+               class="inputNumber"
+               title="Минимальная цена"
+               min="0"
+               max="1000000000"
+               aria-label="Min price"
+               ng-change="appData.section.page.current = 1;mainCtrl.getSearch()"
+               autocomplete="off"
+               placeholder="0">
+
+        <input type="number"
+               ng-model="appData.config.filter_maxprice"
+               ng-model-options="{debounce: 150}"
+               ng-change="mainCtrl.showActiveState(1)"
+               class="inputNumber"
+               title="Максимальная цена"
+               min="0"
+               max="1000000000"
+               aria-label="Max price"
+               ng-change="appData.section.page.current = 1;mainCtrl.getSearch()"
+               autocomplete="off"
+               placeholder="BYR 1G">
+      </span>
+
+      <span ng-if="link.type == 'product' && !mainCtrl.isCurrentState('search')" ng-bind="link.name + ' (#' + link.id + ')'"></span>
+
+      <span ng-if="$last">
+
+        <!-- ng-change for fire pushState -->
+        <select ng-model="appData.config.filter_currency" title="Валюта" ng-change="mainCtrl.changeCurrency()">
+          <option value="-1" disabled>Валюта</option>
+          <option value="0">USD</option>
+          <option value="1">BYR</option>
+        </select>
+
+      </span>
+
+    </li>
+  </ol>
+
+  <nav ng-if="mainCtrl.showPagination()">
+    <ul class="pagination pagination-sm center">
+
+      <!-- Previous page-->
+      <li ng-click="mainCtrl.showPreviousPage()">
+        <a href="#" aria-label="Previous page" ng-if="appData.section.page.current > 1" title="Предыдущие {{appData.config.products_per_page}} тов.">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+
+      <!-- First page-->
+      <li ng-class="{active: appData.section.page.current == 1}" ng-if="appData.section.page.count > 1">
+        <a href="#" aria-label="First page" ng-click="mainCtrl.showActiveState(1)" title="Страница #1">1 <span class="sr-only">(current)</span></a>
+      </li>
+
+      <!-- Middle pages and dots-->
+      <li ng-repeat="page in appData.section.page.id" ng-class="{active: page == appData.section.page.current}">
+        <a href="#" ng-click="mainCtrl.showActiveState(page)" title="Страница #{{page}}" ng-if="mainCtrl.showPage(page)">{{page}} <span class="sr-only">(current)</span></a>
+        <span ng-if="mainCtrl.showPageDots(page)">...</span>
+      </li>
+
+      <!-- Last page-->
+      <li ng-class="{active: appData.section.page.current == appData.section.page.count}" ng-if="appData.section.page.count > 1">
+        <a href="#" aria-label="Last page" ng-click="mainCtrl.showActiveState(appData.section.page.count)" title="Страница #{{appData.section.page.count}}">{{appData.section.page.count}} <span class="sr-only">(current)</span></a>
+      </li>
+
+      <!-- Next page-->
+      <li>
+        <a href="#" aria-label="Next page" ng-click="mainCtrl.showNextPage()" ng-if="appData.section.page.current < appData.section.page.count" title="Следующие {{mainCtrl.calcNextPageProductCount()}} тов.">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+
+</div>

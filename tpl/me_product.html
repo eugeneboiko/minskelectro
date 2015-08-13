@@ -1,0 +1,30 @@
+<div class="well well-sm" ng-bind-html="appData.config.page_center_info" ng-if="appData.config.page_center_info"></div>
+
+<div class="panel panel-default">
+
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left media-left2">
+          <img class="media-object img-flex" src="" ng-src="{{appData.product.image}}" ng-if="appData.product.image" title="{{appData.product.name}}" alt="{{appData.product.name}}">
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading" ng-bind="appData.product.name"></h3>
+        <p>
+          <span>Цена: <span class="text-danger" ng-bind="mainCtrl.filterCurrency(appData.product.price)"></span></span>
+          <span ng-if="appData.product.delivery_n_a == 0">Кол-во: <input type="number" class="inputNumber" ng-model="appData.order.product[appData.product.id].count" ng-change="mainCtrl.getProductToCart(appData.product.id)" title="Количество" min="1" max="100" required> шт.</span>
+          <span>Гарантия: <span class="text-danger" ng-bind="appData.product.warranty + ' мес.'"></span></span>
+          <span>Доставка: <span class="text-danger" ng-bind="appData.product.delivery_time"></span></span>
+          <span>Добавлен: <span class="text-danger" ng-bind="appData.product.date_add | date:'yyyy-MM-dd'"></span></span>
+          <span>Обновлен: <span class="text-danger" ng-bind="appData.product.date_update | date:'yyyy-MM-dd'"></span></span>
+          <span ng-if="appData.product.delivery_n_a == 1"><span>На складе: </span><span class="text-danger">нет</span></span>
+          <a href="#" ng-class="'rating rating_' + appData.product.rating" title="Рейтинг. Всего оценок: {{appData.product.rating_count}}" ng-click="mainCtrl.showReview(appData.product.id)"></a>
+        </p>
+        <p ng-bind-html="appData.product.description"></p>
+        <div class="text-success" ng-if="+appData.product.delivery_free">Бесплатная доставка.</div>
+      </div>
+    </figure>
+  </div>
+
+</div>
+
+<div class="well well-sm" ng-bind-html="appData.config.page_bottom_info" ng-if="appData.config.page_bottom_info"></div>

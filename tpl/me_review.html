@@ -1,0 +1,98 @@
+<form name="reviewForm" ng-submit="reviewForm.$valid && mainCtrl.postReview()">
+  <div class="form-group">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <span>Отзывы</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="mainCtrl.previousState()" title="Закрыть"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="panel-body">
+
+        <div class="media">
+          <div class="media-left media-left2">
+            <a href="#" ng-click="mainCtrl.getProduct(appData.product.id)">
+              <img class="media-object" src="" ng-src="{{appData.product.icon}}" ng-if="appData.product.icon" width="100" height="100" title="подробнее..." alt="подробнее...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">
+              <a href="#" ng-click="mainCtrl.getProduct(appData.product.id)" ng-bind="appData.product.name + ' (#' + appData.product.id + ')'"></a>
+            </h4>
+            <div ng-bind-html="appData.product.short_desc"></div>
+          </div>
+        </div>
+
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="review in appData.review">
+            <h4 class="media-heading" ng-bind="review.name"></h4>
+            <span>Оценка: <span ng-class="'rating rating_' + review.rating + '0'"></span>, Дата добавления отзыва: <span class="label label-primary" ng-bind="review.create_tm"></span></span>
+            <p ng-bind-html="review.review"></p>
+          </li>
+        </ul>
+
+        <h4>Добавить отзыв</h4>
+
+        <div class="input-group contact">
+          <input name="name" type="text" class="form-control" ng-model="appData.user.name" maxlength="20" placeholder="Ваше имя" title="Ваше имя" required autofocus>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.name" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.name && reviewForm.name.$valid" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="phone" type="text" class="form-control" ng-model="appData.user.phone" maxlength="30" placeholder="Телефон" title="Телефон для обратной связи" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.phone" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.phone && reviewForm.phone.$valid" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <input name="email" type="email" class="form-control" ng-model="appData.user.email" maxlength="30" placeholder="E-mail для обратной связи" title="E-mail для обратной связи" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.email" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.email && reviewForm.email.$valid-email && reviewForm.email.$valid" title="Всё правильно"></span>
+            <span class="glyphicon glyphicon-alert text-danger" aria-hidden="true" ng-show="reviewForm.email.$invalid-email || reviewForm.email.$invalid" title="Неправильно заполнено"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact">
+          <textarea name="comment" class="form-control" ng-model="appData.user.comment" placeholder="Опишите ваши впечатления от модели. Почему вы купили эту модель? Что вам особенно нравится в этой модели? Что не нравится?" title="Комментарий" required></textarea>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.comment" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.comment && reviewForm.comment.$valid" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group contact" title="Ваша оценка модели">
+          <span class="input-group-addon">Ваша оценка модели: </span>
+          <span class="form-control rev-stars">
+            <a href="#" class="rev-star {{appData.user.rating > 0 ? 'full' : 'empty'}}" title="Очень плохой" ng-click="appData.user.rating = '1'"></a>
+            <a href="#" class="rev-star {{appData.user.rating > 1 ? 'full' : 'empty'}}" title="Плохой" ng-click="appData.user.rating = '2'"></a>
+            <a href="#" class="rev-star {{appData.user.rating > 2 ? 'full' : 'empty'}}" title="Нормальный" ng-click="appData.user.rating = '3'"></a>
+            <a href="#" class="rev-star {{appData.user.rating > 3 ? 'full' : 'empty'}}" title="Хороший" ng-click="appData.user.rating = '4'"></a>
+            <a href="#" class="rev-star {{appData.user.rating > 4 ? 'full' : 'empty'}}" title="Отличный" ng-click="appData.user.rating = '5'"></a>
+          </span>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.rating > 0" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.rating > 0" title="Всё правильно"></span>
+          </span>
+        </div>
+
+        <div class="input-group col-xs-1">
+          <span class="input-group-addon">Введите цифры: <img ng-src="/ajax/http_get_captcha.php?id={{appData.user.captcha.id}}"/></span>
+          <input name="captcha" type="number" class="form-control inputNumber" ng-model="appData.user.captcha.value" maxlength="4" min="1000" max="9999" placeholder="0000" title="Введите цифры с картинки" required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-pencil text-primary" aria-hidden="true" ng-hide="appData.user.captcha.value" title="Обязательное поле"></span>
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true" ng-show="appData.user.captcha.value && reviewForm.captcha.$valid" title="Всё правильно"></span>
+            <span class="glyphicon glyphicon-alert text-danger" aria-hidden="true" ng-show="reviewForm.captcha.$invalid" title="Неправильно заполнено"></span>
+          </span>
+        </div>
+
+        <input type="submit" class="contact btn btn-primary" ng-disabled="reviewForm.$invalid || (appData.user.rating == 0)" value="Отправить отзыв">
+
+        <div class="alert alert-info" role="alert">Ваш отзыв будет добавлен после подтверждения e-mail.</div>
+      </div>
+    </div>
+  </div>
+</form>
